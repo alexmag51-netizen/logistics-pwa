@@ -1,4 +1,3 @@
-// src/App.tsx
 import * as React from 'react'
 import { View, FlatList } from 'react-native'
 import { Provider as PaperProvider, Appbar, FAB, Card, Text, Menu } from 'react-native-paper'
@@ -17,7 +16,7 @@ import {
 import { BrowserRouter, Routes, Route, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { theme } from './theme'
 
-// Адаптер: превращаем иконку из lucide-react в IconSource-функцию для Paper
+// адаптер для иконок lucide → IconSource
 const IconFn =
   (Comp: React.ComponentType<any>) =>
   ({ color, size }: { color: string; size: number }) =>
@@ -127,7 +126,6 @@ function SettingsScreen() {
   )
 }
 
-// Простой нижний таб-бар на react-router-dom
 function BottomTabs() {
   const location = useLocation()
   const navigate = useNavigate()
@@ -141,7 +139,7 @@ function BottomTabs() {
   return (
     <View
       style={{
-        position: 'fixed',
+        position: 'absolute',
         left: 0,
         right: 0,
         bottom: 0,

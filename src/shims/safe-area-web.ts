@@ -1,17 +1,13 @@
-// src/shims/safe-area-web.ts
 import * as React from 'react'
 import { View } from 'react-native'
 
-// Типы для удобства (TS не обязателен, но это не мешает)
 export type EdgeInsets = { top: number; right: number; bottom: number; left: number }
 export type Frame = { x: number; y: number; width: number; height: number }
 
 const zeroInsets: EdgeInsets = { top: 0, right: 0, bottom: 0, left: 0 }
 
-// Контекст, который обычно предоставляет библиотека
 export const SafeAreaInsetsContext = React.createContext<EdgeInsets>(zeroInsets)
 
-// Метрики окна по умолчанию (то, что Paper иногда передаёт в провайдер)
 export const initialWindowMetrics = {
   frame: {
     x: 0,
@@ -22,7 +18,6 @@ export const initialWindowMetrics = {
   insets: zeroInsets
 }
 
-// Провайдер — просто кладёт инкрусты в контекст
 export function SafeAreaProvider({
   children,
   initialMetrics
@@ -34,12 +29,10 @@ export function SafeAreaProvider({
   return React.createElement(SafeAreaInsetsContext.Provider, { value: insets }, children)
 }
 
-// Простая заглушка SafeAreaView
 export function SafeAreaView(props: any) {
   return React.createElement(View, props)
 }
 
-// Хуки-заглушки
 export function useSafeAreaInsets(): EdgeInsets {
   const ctx = React.useContext(SafeAreaInsetsContext)
   return ctx ?? zeroInsets

@@ -1,6 +1,10 @@
 import { createClient } from '@supabase/supabase-js'
 
-const url = import.meta.env.VITE_SUPABASE_URL as string
-const anon = import.meta.env.VITE_SUPABASE_ANON_KEY as string
-
-export const supabase = createClient(url, anon)
+export const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL!,
+  import.meta.env.VITE_SUPABASE_ANON_KEY!,
+  {
+    auth: { persistSession: true },
+    global: { fetch: typeof fetch !== 'undefined' ? fetch : undefined }
+  }
+)

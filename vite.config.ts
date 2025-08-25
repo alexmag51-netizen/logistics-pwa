@@ -1,4 +1,3 @@
-// vite.config.ts
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -25,32 +24,26 @@ export default defineConfig({
       workbox: { globPatterns: ['**/*.{js,css,html,ico,png,svg}'] }
     })
   ],
-
   resolve: {
     alias: [
-      // Подмена всего RN на RN Web (и подпутей тоже)
+      // RN → RN Web
       { find: 'react-native', replacement: 'react-native-web' },
-
-      // Шим вместо react-native-safe-area-context (чтобы Paper не тянул нативщину)
+      // safe-area → наш веб-шим
       {
         find: 'react-native-safe-area-context',
         replacement: path.resolve(__dirname, 'src/shims/safe-area-web.ts')
       }
     ]
   },
-
   optimizeDeps: {
     esbuildOptions: {
-      // JSX встречается в .js у некоторых пакетов
       loader: { '.js': 'jsx' }
     }
   },
-
   define: {
     global: 'window',
     __DEV__: JSON.stringify(true)
   },
-
   build: {
     commonjsOptions: { transformMixedEsModules: true }
   }
